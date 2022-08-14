@@ -21,8 +21,5 @@ export function countApplesAndOranges(s, t, a, b, apples, oranges) {
     return prev;
   }, 0);
 
-  console.log(appleAmount);
-  console.log(orangeAmount);
-
   return [appleAmount, orangeAmount];
 }
