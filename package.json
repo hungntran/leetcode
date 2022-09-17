@@ -1,5 +1,5 @@
 {
-  "name": "hackerrank",
+  "name": "leetcode",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -7,15 +7,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hungntran/hackerrank.git"
+    "url": "git+https://github.com/hungntran/leetcode.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/hungntran/hackerrank/issues"
+    "url": "https://github.com/hungntran/leetcode/issues"
   },
-  "homepage": "https://github.com/hungntran/hackerrank#readme",
+  "homepage": "https://github.com/hungntran/leetcode#readme",
   "devDependencies": {
     "@babel/core": "^7.18.10",
     "@babel/preset-env": "^7.18.10",
