@@ -15,6 +15,10 @@ export function arrayToTree(arr, i = 0) {
   let root = null;
   // Base case for recursion
   if (i < arr.length) {
+    if (arr[i] == null) {
+      return root;
+    }
+
     root = new TreeNode(arr[i]);
 
     // insert left child
