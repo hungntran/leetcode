@@ -1,4 +1,4 @@
-class TreeNode {
+export class TreeNode {
   constructor(val, left, right) {
     this.val = val === null ? null : val || 0;
     this.left = left || null;
@@ -30,3 +30,44 @@ export function arrayToTree(arr, i = 0) {
 
   return root;
 }
+
+/**
+ *
+ * @param {TreeNode} root
+ */
+export function treeToArray(root) {
+  const res = [];
+
+  const resolve = (root, i = 0) => {
+    if (root == null) {
+      res[i] = null;
+      return;
+    }
+
+    if (root.left) resolve(root.left, 2 * i + 1);
+    if (root.right) resolve(root.right, 2 * i + 2);
+
+    res[i] = root.val;
+  };
+
+  resolve(root);
+  return fillSparseArray(res);
+}
+
+const fillSparseArray = (array, fillValue = null) => {
+  let checkpoint = -1;
+  const result = [...array];
+
+  array.forEach((item, index) => {
+    if (index > checkpoint + 1) {
+      result.splice(
+        checkpoint + 1,
+        index - checkpoint - 1,
+        ...Array(index - checkpoint - 1).fill(fillValue)
+      );
+    }
+    checkpoint = index;
+  });
+
+  return result;
+};
