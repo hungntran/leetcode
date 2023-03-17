@@ -3,7 +3,7 @@
 Create new problem
 
 ```
-yarn gulp --level <easy|medium|hard> --name <name>
+yarn auto:create
 ```
 
 Test command

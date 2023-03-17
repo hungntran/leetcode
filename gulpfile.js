@@ -1,8 +1,7 @@
 const fs = require('fs');
-const argv = require('yargs').argv;
+const prompts = require('prompts');
 
-function initProblem(cb) {
-  const testContent = `import { yourFunctionName } from '.';
+const TEST_CONTENT = `import { yourFunctionName } from '.';
 
 it('Example case 1', () => {
   const input = '';
@@ -14,10 +13,29 @@ it('Example case 2', () => {
   expect(yourFunctionName(input)).toBe(0);
 });`;
 
-  const path = `./src/${argv.level.toUpperCase()}/${argv.name}`;
+async function initProblem(cb) {
+  const response = await prompts([
+    {
+      type: 'select',
+      name: 'difficult',
+      message: 'Pick difficult',
+      choices: [
+        { title: 'Easy', value: 'Easy' },
+        { title: 'Medium', value: 'Medium' },
+        { title: 'Hard', value: 'Hard' },
+      ],
+    },
+    {
+      type: 'text',
+      name: 'name',
+      message: 'Enter problem name',
+    },
+  ]);
+
+  const path = `./src/${response.difficult}/${response.name}`;
   fs.mkdir(path, () => {
     fs.writeFileSync(`${path}/index.js`, '');
-    fs.writeFileSync(`${path}/index.test.js`, new Buffer.from(testContent));
+    fs.writeFileSync(`${path}/index.test.js`, new Buffer.from(TEST_CONTENT));
     cb();
   });
 }
