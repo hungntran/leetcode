@@ -5,12 +5,8 @@ const TEST_CONTENT = `import { yourFunctionName } from '.';
 
 it('Example case 1', () => {
   const input = '';
-  expect(yourFunctionName(input)).toBe(0);
-});
-
-it('Example case 2', () => {
-  const input = '';
-  expect(yourFunctionName(input)).toBe(0);
+  const output = ''
+  expect(yourFunctionName(input)).toBe(output);
 });`;
 
 async function initProblem(cb) {
