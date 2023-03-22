@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "test": "jest",
-    "auto:create": "gulp"
+    "gulp": "gulp"
   },
   "repository": {
     "type": "git",
