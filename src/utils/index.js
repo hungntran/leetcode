@@ -71,3 +71,48 @@ const fillSparseArray = (array, fillValue = null) => {
 
   return result;
 };
+
+export class ListNode {
+  constructor(val, next) {
+    this.val = val === undefined ? 0 : val;
+    this.next = next === undefined ? null : next;
+  }
+}
+
+/**
+ * @param {ListNode} source
+ * @param {ListNode} target
+ * @return {boolean}
+ */
+export const isLinkedListEqual = (source, target) => {
+  while (source != null && target != null) {
+    if (source.val !== target.val) {
+      return false;
+    }
+
+    source = source.next;
+    target = target.next;
+  }
+
+  return source == null || target == null;
+};
+
+/**
+ * @param {ListNode} arr
+ * @return {ListNode}
+ */
+export const arrayToLinkedList = (arr) => {
+  if (arr.length === 0) {
+    return null;
+  }
+
+  const head = new ListNode(arr[0]);
+  let cur = head;
+  for (let i = 1; i < arr.length; i++) {
+    const node = new ListNode(arr[i]);
+    cur.next = node;
+    cur = node;
+  }
+
+  return head;
+};
