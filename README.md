@@ -3,7 +3,7 @@
 Create new problem
 
 ```
-yarn auto:create
+yarn gulp
 ```
 
 Test command
