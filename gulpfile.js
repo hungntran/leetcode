@@ -1,14 +1,6 @@
 const fs = require('fs');
 const prompts = require('prompts');
 
-const TEST_CONTENT = `import { yourFunctionName } from '.';
-
-it('Example case 1', () => {
-  const input = '';
-  const output = ''
-  expect(yourFunctionName(input)).toBe(output);
-});`;
-
 async function initProblem(cb) {
   const response = await prompts([
     {
@@ -31,7 +23,6 @@ async function initProblem(cb) {
   const path = `./src/${response.difficult}/${response.name}`;
   fs.mkdir(path, () => {
     fs.writeFileSync(`${path}/index.js`, '');
-    fs.writeFileSync(`${path}/index.test.js`, new Buffer.from(TEST_CONTENT));
     cb();
   });
 }
