@@ -17,7 +17,7 @@ var change = function (amount, coins) {
       return 1;
     }
 
-    const key = coins.join(',') + '_' + amount;
+    const key = coins.join('') + '_' + amount;
 
     if (cache.has(key)) {
       return cache.get(key);
@@ -33,8 +33,5 @@ var change = function (amount, coins) {
     return count;
   };
 
-  helper(coins, amount, cache);
-  console.log(cache);
+  return helper(coins, amount, cache);
 };
-
-change(5, [1, 2, 5]);
