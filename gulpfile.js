@@ -21,6 +21,12 @@ async function initProblem(cb) {
   ]);
 
   const path = `./src/${response.difficult}/${response.name}`;
+  const isExist = fs.existsSync(path);
+
+  if (isExist) {
+    throw new Error('File name exists');
+  }
+
   fs.mkdir(path, () => {
     fs.writeFileSync(`${path}/index.js`, '');
     cb();
