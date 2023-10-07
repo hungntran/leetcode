@@ -5,33 +5,31 @@
  */
 var change = function (amount, coins) {
   coins.sort((a, b) => a - b);
+  const cache = {};
 
-  const cache = new Map();
+  return helper(0, 0);
 
-  const helper = (coins, amount) => {
-    if (amount < 0) {
-      return 0;
-    }
-
-    if (amount === 0) {
+  function helper(i, a) {
+    if (a === amount) {
       return 1;
     }
 
-    const key = coins.join('') + '_' + amount;
-
-    if (cache.has(key)) {
-      return cache.get(key);
+    if (a > amount) {
+      return 0;
     }
 
-    let count = 0;
-
-    for (let i = 0; i < coins.length; i++) {
-      count += helper(coins.slice(0, i + 1), amount - coins[i]);
+    if (i === coins.length) {
+      return 0;
     }
 
-    cache.set(key, count);
-    return count;
-  };
+    const key = `${i}_${a}`;
 
-  return helper(coins, amount, cache);
+    if (cache[key] !== undefined) {
+      return cache[key];
+    }
+
+    cache[key] = helper(i, a + coins[i]) + helper(i + 1, a);
+
+    return cache[key];
+  }
 };
