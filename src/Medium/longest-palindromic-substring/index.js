@@ -3,34 +3,36 @@
  * @return {string}
  */
 var longestPalindrome = function (s) {
-  const n = s.length;
-  const dp = Array(n)
-    .fill(0)
-    .map(() => []);
-  const ans = [0, 0];
+  let output = '';
+  let max = 0;
 
-  for (let i = 0; i < n; i++) {
-    dp[i][i] = true;
-  }
+  for (let i = 0; i < s.length; i++) {
+    let r = i,
+      l = i;
 
-  for (let i = 0; i < n - 1; i++) {
-    if (s[i] === s[i + 1]) {
-      dp[i][i + 1] = true;
-      ans[0] = i;
-      ans[1] = i + 1;
-    }
-  }
-
-  for (let diff = 2; diff < n; diff++) {
-    for (let i = 0; i < n - diff; i++) {
-      let j = i + diff;
-      if (s[i] === s[j] && dp[i + 1][j - 1]) {
-        dp[i][j] = true;
-        ans[0] = i;
-        ans[1] = j;
+    while (l >= 0 && r < s.length && s[l] === s[r]) {
+      if (r - l + 1 > max) {
+        max = r - l + 1;
+        output = s.slice(l, r + 1);
       }
+
+      l--;
+      r++;
+    }
+
+    l = i;
+    r = i + 1;
+
+    while (l >= 0 && r < s.length && s[l] === s[r]) {
+      if (r - l + 1 > max) {
+        max = r - l + 1;
+        output = s.slice(l, r + 1);
+      }
+
+      l--;
+      r++;
     }
   }
 
-  return s.slice(ans[0], ans[1] + 1);
+  return output;
 };
