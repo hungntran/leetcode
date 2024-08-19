@@ -3,27 +3,25 @@
  * @return {boolean}
  */
 var lemonadeChange = function (bills) {
-  const change = { 5: 0, 10: 0 };
+  let balance = { 5: 0, 10: 0 }
 
   for (const bill of bills) {
-    if (bill === 5) {
-      change[5] += 1;
-    } else if (bill === 10 && change[5] > 0) {
-      change[10] += 1;
-      change[5] -= 1;
+    if (bill === 10) {
+      if (balance[5] <= 0) return false
+      balance[5] -= 1
     } else if (bill === 20) {
-      if (change[10] > 0 && change[5] > 0) {
-        change[10] -= 1;
-        change[5] -= 1;
-      } else if (change[5] > 2) {
-        change[5] -= 3;
+      if (balance[10] <= 0) {
+        if (balance[5] < 3) return false
+        balance[5] -= 3
       } else {
-        return false;
+        if (balance[5] <= 0) return false
+        balance[10] -= 1
+        balance[5] -= 1
       }
-    } else {
-      return false;
     }
+
+    balance[bill] += 1
   }
 
-  return true;
-};
+  return true
+}

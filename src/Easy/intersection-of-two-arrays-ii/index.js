@@ -3,15 +3,20 @@
  * @param {number[]} nums2
  * @return {number[]}
  */
-const intersect = function (nums1, nums2) {
-  const res = [];
-  nums1.forEach((num) => {
-    const index = nums2.indexOf(num);
-    if (index !== -1) {
-      res.push(num);
-      nums2.splice(index, 1);
-    }
-  });
+var intersect = function (nums1, nums2) {
+  const output = []
+  const map = nums1.reduce((prev, num) => {
+    if (!prev[num]) prev[num] = 0
+    prev[num] += 1
+    return prev
+  }, {})
 
-  return res;
-};
+  nums2.forEach((num) => {
+    if (map[num] && map[num] > 0) {
+      output.push(num)
+      map[num] -= 1
+    }
+  })
+
+  return output
+}
